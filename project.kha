@@ -5,6 +5,22 @@
 		"width": 640,
 		"height": 480
 	},
-	"assets": [],
-	"rooms": []
+	"assets": [
+    {
+      "type": "image",
+      "file": "playerShip1_green.png",
+      "name": "playerShip",
+      "scale": 1
+    }
+  ],
+	"rooms": [
+    {
+      "name": "gameRoom",
+      "neighbors": [],
+      "assets": [
+        "playerShip"
+      ],
+      "parent": null
+    }
+  ]
 }
