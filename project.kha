@@ -1,0 +1,10 @@
+{
+	"format": 3,
+	"game": {
+		"name": "KhaShmup",
+		"width": 640,
+		"height": 480
+	},
+	"assets": [],
+	"rooms": []
+}
