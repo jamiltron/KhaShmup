@@ -8,7 +8,7 @@ basic explanation as to how one may write a very small game using Kha.
 Assets
 ------
 
-The assets used in this game are from (Kenny.nl)[http://kenney.nl/assets].
+The assets used in this game are from [http://kenney.nl/assets](Kenny.nl).
 Definitely checkout out Kenny's work, and donate so he can keep contributing
 great assets.
 
