@@ -1,11 +1,11 @@
 {
-	"format": 3,
-	"game": {
-		"name": "KhaShmup",
-		"width": 640,
-		"height": 480
-	},
-	"assets": [
+  "format": 3,
+  "game": {
+    "name": "KhaShmup",
+    "width": 640,
+    "height": 480
+  },
+  "assets": [
     {
       "type": "image",
       "file": "playerShip1_green.png",
@@ -13,7 +13,7 @@
       "scale": 1
     }
   ],
-	"rooms": [
+  "rooms": [
     {
       "name": "gameRoom",
       "neighbors": [],
