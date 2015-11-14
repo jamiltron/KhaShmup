@@ -5,6 +5,14 @@ This is a basic game written in Kha, hopefully branched out to provide a
 basic explanation as to how one may write a very small game using Kha.
 
 
+Assets
+------
+
+The assets used in this game are from [http://kenney.nl/assets](Kenney.nl).
+Definitely checkout out Kenny's work, and donate so he can keep contributing
+great assets.
+
+
 License
 -------
 Copyright (c) 2015, Justin Hamilton 
