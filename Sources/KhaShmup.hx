@@ -1,5 +1,6 @@
 package ;
 
+import kha.Button;
 import kha.Color;
 import kha.Configuration;
 import kha.Framebuffer;
@@ -9,15 +10,18 @@ import kha.Loader;
 import kha.LoadingScreen;
 import kha.Scaler;
 import kha.Sys;
-import Ship;
 
 class KhaShmup extends Game {
 
   private var backbuffer: Image;
   private var ship: Ship;
+  private var controls: Controls;
+  private var timer: Timer;
+  private var initialized: Bool;
 
   public function new() {
     super("KhaShmup", false);
+    initialized = false;
   }
 
   override public function init(): Void {
@@ -27,10 +31,13 @@ class KhaShmup extends Game {
 
   private function loadingFinished(): Void {
     backbuffer = Image.createRenderTarget(width, height);
-    ship = new Ship(Std.int(width / 2) - Std.int(Ship.width / 2), 
-      Std.int(height / 2) - Std.int(Ship.height / 2), 
+    ship = new Ship(width * 0.5 - Ship.width * 0.5, 
+      height * 0.5 - Ship.height * 0.5, 
       Loader.the.getImage("playerShip"));
+    controls = new Controls();
+    timer = new Timer();
     Configuration.setScreen(this);
+    initialized = true;
   }
 
   override public function render(framebuffer: Framebuffer): Void {
@@ -43,6 +50,21 @@ class KhaShmup extends Game {
     startRender(framebuffer);
     Scaler.scale(backbuffer, framebuffer, Sys.screenRotation);
     endRender(framebuffer);
+  }
+
+  override public function update() {
+    if (!initialized) return;
+
+    timer.update();
+    ship.update(controls, timer.deltaTime);
+  }
+
+  override public function buttonDown(button: Button): Void {
+    controls.buttonDown(button);
+  }
+
+  override public function buttonUp(button: Button): Void {
+    controls.buttonUp(button);
   }
 
 

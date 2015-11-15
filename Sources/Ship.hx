@@ -9,10 +9,11 @@ class Ship {
 
   private var image: Image;
 
-  public var x: Int;
-  public var y: Int;
+  public var x: Float;
+  public var y: Float;
+  public var speed: Float = 200.0;
 
-  public function new(x: Int, y: Int, image: Image) {
+  public function new(x: Float, y: Float, image: Image) {
     this.x = x;
     this.y = y;
     this.image = image;
@@ -21,6 +22,20 @@ class Ship {
   public function render(g: Graphics) {
     if (image != null) {
       g.drawImage(image, x, y);
+    }
+  }
+
+  public function update(controls: Controls, deltaTime: Float) {
+    if (controls.left && !controls.right) {
+      x -= speed * deltaTime;
+    } else if (controls.right && !controls.left) {
+      x += speed * deltaTime;
+    }
+
+    if (controls.up && !controls.down) {
+      y -= speed * deltaTime;
+    } else if (controls.down && !controls.up) {
+      y += speed * deltaTime;
     }
   }
 }
