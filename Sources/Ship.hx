@@ -1,7 +1,7 @@
-package ;
+package;
 
-import kha.graphics2.Graphics;
 import kha.Image;
+import kha.graphics2.Graphics;
 
 class Ship {
   public static var width: Int = 99;
@@ -9,10 +9,10 @@ class Ship {
 
   private var image: Image;
 
-  public var x: Int;
-  public var y: Int;
+  public var x: Float;
+  public var y: Float;
 
-  public function new(x: Int, y: Int, image: Image) {
+  public function new(x: Float, y: Float, image: Image) {
     this.x = x;
     this.y = y;
     this.image = image;

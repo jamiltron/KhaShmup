@@ -9,7 +9,6 @@ import kha.Loader;
 import kha.LoadingScreen;
 import kha.Scaler;
 import kha.Sys;
-import Ship;
 
 class KhaShmup extends Game {
 
@@ -27,8 +26,8 @@ class KhaShmup extends Game {
 
   private function loadingFinished(): Void {
     backbuffer = Image.createRenderTarget(width, height);
-    ship = new Ship(Std.int(width / 2) - Std.int(Ship.width / 2), 
-      Std.int(height / 2) - Std.int(Ship.height / 2), 
+    ship = new Ship(width * 0.5 - Ship.width * 0.5, 
+      height * 0.5 - Ship.height * 0.5, 
       Loader.the.getImage("playerShip"));
     Configuration.setScreen(this);
   }
@@ -44,6 +43,5 @@ class KhaShmup extends Game {
     Scaler.scale(backbuffer, framebuffer, Sys.screenRotation);
     endRender(framebuffer);
   }
-
 
 }
