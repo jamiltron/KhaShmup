@@ -1,7 +1,7 @@
-package ;
+package;
 
-import kha.graphics2.Graphics;
 import kha.Image;
+import kha.graphics2.Graphics;
 
 class Ship {
   public static var width: Int = 99;
