@@ -2,8 +2,8 @@
 	"format": 3,
 	"game": {
 		"name": "KhaShmup",
-		"width": 640,
-		"height": 480
+		"width": 800,
+		"height": 600
 	},
 	"assets": [],
 	"rooms": []
