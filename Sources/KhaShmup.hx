@@ -13,6 +13,8 @@ import kha.Sys;
 
 class KhaShmup extends Game {
 
+  private static var bgColor = Color.fromValue(0x26004d);
+
   private var backbuffer: Image;
   private var ship: Ship;
   private var controls: Controls;
@@ -43,7 +45,7 @@ class KhaShmup extends Game {
   override public function render(framebuffer: Framebuffer): Void {
     var g = backbuffer.g2;
     
-    g.begin(Color.Black);
+    g.begin(bgColor);
     ship.render(g);
     g.end();
 
@@ -66,6 +68,5 @@ class KhaShmup extends Game {
   override public function buttonUp(button: Button): Void {
     controls.buttonUp(button);
   }
-
 
 }
