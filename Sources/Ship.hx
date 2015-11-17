@@ -9,10 +9,10 @@ class Ship {
 
   private var image: Image;
 
-  public var x: Float;
-  public var y: Float;
+  public var x: Int;
+  public var y: Int;
 
-  public function new(x: Float, y: Float, image: Image) {
+  public function new(x: Int, y: Int, image: Image) {
     this.x = x;
     this.y = y;
     this.image = image;

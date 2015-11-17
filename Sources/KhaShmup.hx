@@ -1,4 +1,4 @@
-package ;
+package;
 
 import kha.Color;
 import kha.Configuration;
@@ -26,8 +26,8 @@ class KhaShmup extends Game {
 
   private function loadingFinished(): Void {
     backbuffer = Image.createRenderTarget(width, height);
-    ship = new Ship(width * 0.5 - Ship.width * 0.5, 
-      height * 0.5 - Ship.height * 0.5, 
+    ship = new Ship(Math.round(width * 0.5 - Ship.width * 0.5), 
+      Math.round(height * 0.5 - Ship.height * 0.5), 
       Loader.the.getImage("playerShip"));
     Configuration.setScreen(this);
   }
