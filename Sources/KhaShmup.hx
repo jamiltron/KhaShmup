@@ -14,6 +14,7 @@ class KhaShmup extends Game {
 
   private var backbuffer: Image;
   private var ship: Ship;
+  private static var bgColor = Color.fromValue(0x26004d);
 
   public function new() {
     super("KhaShmup", false);
@@ -35,7 +36,7 @@ class KhaShmup extends Game {
   override public function render(framebuffer: Framebuffer): Void {
     var g = backbuffer.g2;
     
-    g.begin(Color.Black);
+    g.begin(bgColor);
     ship.render(g);
     g.end();
 
