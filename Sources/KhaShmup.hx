@@ -6,7 +6,6 @@ import kha.Framebuffer;
 import kha.Image;
 import kha.Key;
 import kha.Scaler;
-import kha.Scheduler;
 import kha.System;
 import kha.input.Keyboard;
 
@@ -35,7 +34,6 @@ class KhaShmup {
     controls = new Controls();
     timer = new Timer();
     Keyboard.get().notify(keyDown, keyUp);
-    Scheduler.start();
   }
 
   public function render(framebuffer: Framebuffer): Void {
