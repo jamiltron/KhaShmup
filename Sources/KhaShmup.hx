@@ -27,7 +27,6 @@ class KhaShmup {
     ship = new Ship(Math.round(width * 0.5 - Ship.width * 0.5), 
       Math.round(height * 0.5 - Ship.height * 0.5), 
       Assets.images.playerShip);
-      //Loader.the.getImage("playerShip"));
   }
 
   public function render(framebuffer: Framebuffer): Void {
