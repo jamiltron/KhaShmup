@@ -1,6 +1,6 @@
-package ;
+package;
 
-import kha.Button;
+import kha.Key;
 
 class Controls {
 
@@ -13,27 +13,33 @@ class Controls {
 
   }
 
-  public function buttonDown(button: Button) { 
-    if (button == Button.LEFT) {
+  public function keyDown(key: Key) { 
+    switch (key) {
+    case LEFT:
       left = true;
-    } else if (button == Button.RIGHT) {
+    case RIGHT:
       right = true;
-    } else if (button == Button.UP) {
+    case UP:
       up = true;
-    } else if (button == Button.DOWN) {
+    case DOWN:
       down = true;
+    default:
+      // no-op
     }
   }
 
-  public function buttonUp(button: Button) { 
-    if (button == Button.LEFT) {
+  public function keyUp(key: Key) { 
+    switch (key) {
+    case LEFT:
       left = false;
-    } else if (button == Button.RIGHT) {
+    case RIGHT:
       right = false;
-    } else if (button == Button.UP) {
+    case UP:
       up = false;
-    } else if (button == Button.DOWN) {
+    case DOWN:
       down = false;
+    default:
+      //no-op
     }
   }
 }
