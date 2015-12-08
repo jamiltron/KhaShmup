@@ -38,6 +38,7 @@ class KhaShmup extends Game {
       Loader.the.getImage("playerShip"));
     controls = new Controls();
     timer = new Timer();
+    bullets = new Array<Bullet>();
     Configuration.setScreen(this);
     initialized = true;
   }

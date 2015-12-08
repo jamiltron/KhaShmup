@@ -11,6 +11,12 @@
       "file": "playerShip1_green.png",
       "name": "playerShip",
       "scale": 1
+    },
+    {
+      "type": "image",
+      "file": "laserGreen08.png",
+      "name": "playerBullet",
+      "scale": 1
     }
   ],
   "rooms": [
@@ -18,7 +24,8 @@
       "name": "gameRoom",
       "neighbors": [],
       "assets": [
-        "playerShip"
+        "playerShip",
+        "playerBullet"
       ],
       "parent": null
     }

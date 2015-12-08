@@ -8,9 +8,9 @@ class Controls {
   public var right: Bool;
   public var up: Bool;
   public var down: Bool;
+  public var shoot: Bool;
 
   public function new() {
-
   }
 
   public function buttonDown(button: Button) { 
@@ -22,6 +22,8 @@ class Controls {
       up = true;
     } else if (button == Button.DOWN) {
       down = true;
+    } else if (button == Button.Z) {
+      shoot = true;
     }
   }
 
@@ -34,6 +36,9 @@ class Controls {
       up = false;
     } else if (button == Button.DOWN) {
       down = false;
+    } else if (button == Button.Z) {
+      shoot = false;
     }
   }
+
 }
