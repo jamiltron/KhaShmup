@@ -9,21 +9,29 @@ class Ship {
   public static var height: Int = 75;
 
   private var image: Image;
-  private var bulletImage: Image;
-  private var bullets: Array<Bullet>;
+  private var gun: Gun;
+  private var halfWidth: Int;
+  private var gunOffsetY = 10;
 
-  public var x: Float;
-  public var y: Float;
-  public var speed: Float = 200.0;
+  public var x: Int;
+  public var y: Int;
+  public var speed: Float = 300.0;
 
   public function new(x: Int, y: Int, image: Image) {
     this.x = x;
     this.y = y;
     this.image = image;
-    bullets = new Array<Bullet>();
+    halfWidth = Std.int(image.width / 2);
+  }
+
+  public function attachGun(gun: Gun) {
+    this.gun = gun;
   }
 
   public function render(g: Graphics) {
+    if (gun != null) {
+      gun.render(g);
+    }
     g.drawImage(image, x, y);
   }
 
@@ -40,11 +48,11 @@ class Ship {
       y += Math.round(speed * deltaTime);
     }
 
-    updateBullets();
-
-    if (controls.shoot) {
-      bullets.push(new Bullet(x - 5, y - 3, bulletImage));
-      bullets.push(new Bullet(x + 5, y - 3, bulletImage));
+    if (gun != null) {
+      if (controls.shoot) {
+        gun.shoot(x + halfWidth, y - gunOffsetY);
+      }
+      gun.update(deltaTime);
     }
   }
 }

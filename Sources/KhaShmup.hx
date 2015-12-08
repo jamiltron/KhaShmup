@@ -1,73 +1,75 @@
 package;
 
-import kha.Button;
+import kha.Assets;
 import kha.Color;
-import kha.Configuration;
 import kha.Framebuffer;
-import kha.Game;
 import kha.Image;
-import kha.Loader;
-import kha.LoadingScreen;
+import kha.Key;
 import kha.Scaler;
-import kha.Sys;
+import kha.System;
+import kha.input.Keyboard;
 
-class KhaShmup extends Game {
+class KhaShmup {
 
   private static var bgColor = Color.fromValue(0x26004d);
+  private static inline var width = 800;
+  private static inline var height = 600;
 
   private var backbuffer: Image;
-  private var ship: Ship;
   private var controls: Controls;
+  private var initialized: Bool = false;
+  private var ship: Ship;
   private var timer: Timer;
-  private var initialized: Bool;
 
   public function new() {
-    super("KhaShmup", false);
-    initialized = false;
-  }
-
-  override public function init(): Void {
-    Configuration.setScreen(new LoadingScreen());
-    Loader.the.loadRoom("gameRoom", loadingFinished);
+    Assets.loadEverything(loadingFinished);
   }
 
   private function loadingFinished(): Void {
+    initialized = true;
     backbuffer = Image.createRenderTarget(width, height);
-    ship = new Ship(Math.round(width * 0.5 - Ship.width * 0.5), 
-      Math.round(height * 0.5 - Ship.height * 0.5), 
-      Loader.the.getImage("playerShip"));
     controls = new Controls();
     timer = new Timer();
-    bullets = new Array<Bullet>();
-    Configuration.setScreen(this);
-    initialized = true;
+    Keyboard.get().notify(keyDown, keyUp);
+    setupShip();
   }
 
-  override public function render(framebuffer: Framebuffer): Void {
+  public function render(framebuffer: Framebuffer): Void {
+    if (!initialized) {
+      return;
+    }
+
     var g = backbuffer.g2;
     
     g.begin(bgColor);
     ship.render(g);
     g.end();
 
-    startRender(framebuffer);
-    Scaler.scale(backbuffer, framebuffer, Sys.screenRotation);
-    endRender(framebuffer);
+    framebuffer.g2.begin();
+    Scaler.scale(backbuffer, framebuffer, System.screenRotation);
+    framebuffer.g2.end();
+
+    update();
   }
 
-  override public function update() {
-    if (!initialized) return;
+  private function setupShip() {
+    ship = new Ship(Math.round(width * 0.5 - Ship.width * 0.5), 
+      Math.round(height * 0.5 - Ship.height * 0.5), 
+      Assets.images.playerShip);
+    ship.attachGun(new Gun(0.25, Assets.images.laser));
+  }
 
+  private function update() {
     timer.update();
     ship.update(controls, timer.deltaTime);
   }
 
-  override public function buttonDown(button: Button): Void {
-    controls.buttonDown(button);
+  private function keyDown(key: Key, value: String): Void {
+    controls.keyDown(key, value);
   }
 
-  override public function buttonUp(button: Button): Void {
-    controls.buttonUp(button);
+  private function keyUp(key: Key, value: String): Void {
+    controls.keyUp(key, value);
   }
 
 }
