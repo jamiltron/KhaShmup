@@ -56,7 +56,7 @@ class KhaShmup {
     ship = new Ship(Math.round(width * 0.5 - Ship.width * 0.5), 
       Math.round(height * 0.5 - Ship.height * 0.5), 
       Assets.images.playerShip);
-    ship.attachGun(new Gun(0.25, Assets.images.laser));
+    ship.attachGun(new Gun(0.25, Assets.images.laser, Assets.sounds.laserShoot));
   }
 
   private function update() {

@@ -1,20 +1,24 @@
 package;
 
 import kha.Image;
+import kha.Sound;
+import kha.audio1.Audio;
 import kha.graphics2.Graphics;
 
 class Gun {
 
   private var bulletImage: Image;
+  private var bulletSound: Sound;
   private var shotInterval: Float;
   private var cooldownLeft: Float;
   private var bullets: Array<Bullet>;
   private var halfBulletWidth: Int;
   private var halfBulletHeight: Int;
 
-  public function new(shotInterval: Float, bulletImage: Image) {
+  public function new(shotInterval: Float, bulletImage: Image, bulletSound: Sound) {
     this.shotInterval = shotInterval;
     this.bulletImage = bulletImage;
+    this.bulletSound = bulletSound;
     cooldownLeft = 0;
     bullets = new Array<Bullet>();
     halfBulletWidth = Std.int(bulletImage.width / 2);
@@ -22,6 +26,7 @@ class Gun {
 
   public function shoot(x: Int, y: Int): Void {
     if (cooldownLeft <= 0) {
+      Audio.play(bulletSound, true);
       cooldownLeft = shotInterval;
       var adjX: Int = x - halfBulletWidth;
 
