@@ -3,13 +3,15 @@ package;
 import kha.Image;
 import kha.graphics2.Graphics;
 
-class Bullet {
+class Enemy {
+  public static inline var width = 93;
+  public static inline var height = 84;
 
   private var image: Image;
 
   public var x: Int;
   public var y: Int;
-  public var speed = 600;
+  public var speed = 200.0;
   public var isActive = true;
 
   public function new(x: Int, y: Int, image: Image) {
@@ -17,7 +19,7 @@ class Bullet {
     activate(x, y);
   }
 
-  public function activate(x: Int, y: Int) {
+  public function activate(x: Int, y: Int): Void {
     this.x = x;
     this.y = y;
     isActive = true;
@@ -34,7 +36,6 @@ class Bullet {
       return;
     }
 
-    y -= Math.round(speed * deltaTime);
+    y += Math.round(speed * deltaTime);
   }
-
 }

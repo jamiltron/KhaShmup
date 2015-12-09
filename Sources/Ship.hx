@@ -14,7 +14,7 @@ class Ship {
 
   public var x: Int;
   public var y: Int;
-  public var speed: Float = 300.0;
+  public var speed = 300;
 
   public function new(x: Int, y: Int, image: Image) {
     this.x = x;

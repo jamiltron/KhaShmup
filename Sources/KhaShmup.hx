@@ -66,7 +66,6 @@ class KhaShmup {
 
   private function update() {
     timer.update();
-    //ship.update(controls, timer.deltaTime);
     updateShip();
   }
 
