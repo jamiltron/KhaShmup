@@ -12,8 +12,9 @@ import kha.input.Keyboard;
 class KhaShmup {
 
   private static var bgColor = Color.fromValue(0x26004d);
-  private static inline var width = 800;
-  private static inline var height = 600;
+
+  public static inline var width = 800;
+  public static inline var height = 600;
 
   private var backbuffer: Image;
   private var controls: Controls;
@@ -27,6 +28,8 @@ class KhaShmup {
 
   private function loadingFinished(): Void {
     initialized = true;
+
+    // create a buffer to draw to
     backbuffer = Image.createRenderTarget(width, height);
     controls = new Controls();
     timer = new Timer();
@@ -40,11 +43,13 @@ class KhaShmup {
     }
 
     var g = backbuffer.g2;
-    
+
+    // clear and draw to our backbuffer
     g.begin(bgColor);
     ship.render(g);
     g.end();
 
+    // draw our backbuffer onto the active framebuffer
     framebuffer.g2.begin();
     Scaler.scale(backbuffer, framebuffer, System.screenRotation);
     framebuffer.g2.end();
@@ -53,8 +58,8 @@ class KhaShmup {
   }
 
   private function setupShip() {
-    ship = new Ship(Math.round(width * 0.5 - Ship.width * 0.5), 
-      Math.round(height * 0.5 - Ship.height * 0.5), 
+    ship = new Ship(Std.int(width / 2) - Std.int(Ship.width / 2), 
+      Std.int(height / 2) - Std.int(Ship.height / 2), 
       Assets.images.playerShip);
     ship.attachGun(new Gun(0.25, Assets.images.bullet, Assets.sounds.bulletShoot));
   }
