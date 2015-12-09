@@ -11,6 +11,10 @@ import kha.input.Keyboard;
 
 class KhaShmup {
 
+
+
+
+
   private static var bgColor = Color.fromValue(0x26004d);
   private static inline var width = 800;
   private static inline var height = 600;
@@ -56,7 +60,7 @@ class KhaShmup {
     ship = new Ship(Math.round(width * 0.5 - Ship.width * 0.5), 
       Math.round(height * 0.5 - Ship.height * 0.5), 
       Assets.images.playerShip);
-    ship.attachGun(new Gun(0.25, Assets.images.laser, Assets.sounds.laserShoot));
+    ship.attachGun(new Gun(0.25, Assets.images.bullet, Assets.sounds.laserShoot));
   }
 
   private function update() {

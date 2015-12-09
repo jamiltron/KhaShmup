@@ -29,18 +29,14 @@ class Gun {
       cooldownLeft = shotInterval;
       var adjX: Int = x - halfBulletWidth;
 
-      var foundBullet = false;
       for (i in 0...bullets.length) {
         if (!bullets[i].isActive) {
           bullets[i].activate(adjX, y);
-          foundBullet = true;
           return;
         }
       }
 
-      if (!foundBullet) {
-        bullets.push(new Bullet(adjX, y, bulletImage));
-      }
+      bullets.push(new Bullet(adjX, y, bulletImage));
     }
   }
 
