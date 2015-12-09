@@ -13,7 +13,6 @@ class Gun {
   private var cooldownLeft: Float;
   private var bullets: Array<Bullet>;
   private var halfBulletWidth: Int;
-  private var halfBulletHeight: Int;
 
   public function new(shotInterval: Float, bulletImage: Image, bulletSound: Sound) {
     this.shotInterval = shotInterval;
