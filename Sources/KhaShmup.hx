@@ -9,11 +9,13 @@ import kha.System;
 class KhaShmup {
 
   private static var bgColor = Color.fromValue(0x26004d);
+  public static inline var width = 800;
+  public static inline var height = 600;
 
   private var backbuffer: Image;
 
   public function new() {
-    backbuffer = Image.createRenderTarget(800, 600);
+    backbuffer = Image.createRenderTarget(width, height);
   }
 
   public function render(framebuffer: Framebuffer): Void {
