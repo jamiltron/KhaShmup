@@ -18,7 +18,7 @@ class KhaShmup {
 
   private var backbuffer: Image;
   private var controls: Controls;
-  private var initialized: Bool = false;
+  private var initialized = false;
   private var ship: Ship;
   private var timer: Timer;
 
@@ -66,7 +66,28 @@ class KhaShmup {
 
   private function update() {
     timer.update();
+    //ship.update(controls, timer.deltaTime);
+    updateShip();
+  }
+
+  private function updateShip() {
     ship.update(controls, timer.deltaTime);
+
+    // limit the ship to the width of the screen
+    if (ship.x < 0) {
+      ship.x = 0;
+    } else if (ship.x + Ship.width > width) {
+      ship.x = width - Ship.width;
+    }
+
+    // limit the ship to the height of the screen
+    if (ship.y < 0) {
+      ship.y = 0;
+    } else if (ship.y + Ship.height > height) {
+      ship.y = height - Ship.height;
+    }
+
+
   }
 
   private function keyDown(key: Key, value: String): Void {
