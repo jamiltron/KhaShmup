@@ -4,14 +4,14 @@ import kha.Image;
 import kha.graphics2.Graphics;
 
 class Ship {
-  public static inline var width: Int = 99;
-  public static inline var height: Int = 75;
+  public static inline var width = 99;
+  public static inline var height = 75;
 
   private var image: Image;
 
   public var x: Float;
   public var y: Float;
-  public var speed: Float = 200.0;
+  public var speed = 300.0;
 
   public function new(x: Int, y: Int, image: Image) {
     this.x = x;
