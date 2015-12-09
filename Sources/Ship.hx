@@ -9,8 +9,8 @@ class Ship {
 
   private var image: Image;
 
-  public var x: Float;
-  public var y: Float;
+  public var x: Int;
+  public var y: Int;
   public var speed = 300.0;
 
   public function new(x: Int, y: Int, image: Image) {
