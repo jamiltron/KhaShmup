@@ -11,11 +11,11 @@ class KhaShmup {
 
   private static var bgColor = Color.fromValue(0x26004d);
 
-  public static inline var width = 800;
-  public static inline var height = 600;
+  public static inline var screenWidth = 800;
+  public static inline var screenHeight = 600;
 
   private var backbuffer: Image;
-  private var initialized: Bool = false;
+  private var initialized = false;
   private var ship: Ship;
 
   public function new() {
@@ -26,12 +26,13 @@ class KhaShmup {
     initialized = true;
 
     // create a buffer to draw to
-    backbuffer = Image.createRenderTarget(width, height);
+    backbuffer = Image.createRenderTarget(screenWidth, screenHeight);
 
     // create our player
-    ship = new Ship(Std.int(width / 2) - Std.int(Ship.width / 2), 
-      Std.int(height / 2) - Std.int(Ship.height / 2), 
-      Assets.images.playerShip);
+    var shipImg = Assets.images.playerShip;
+    ship = new Ship(Std.int(screenWidth / 2) - Std.int(shipImg.width / 2), 
+      Std.int(screenHeight / 2) - Std.int(shipImg.height / 2), 
+      shipImg);
   }
 
   public function render(framebuffer: Framebuffer): Void {
