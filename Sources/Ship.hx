@@ -4,13 +4,12 @@ import kha.Image;
 import kha.graphics2.Graphics;
 
 class Ship {
-  public static inline var width = 99;
-  public static inline var height = 75;
-
   private var image: Image;
 
   public var x: Int;
   public var y: Int;
+  public var width(get, null): Int;
+  public var height(get, null): Int;
   public var speed = 300.0;
 
   public function new(x: Int, y: Int, image: Image) {
@@ -19,10 +18,16 @@ class Ship {
     this.image = image;
   }
 
+  function get_width(): Int {
+    return image.width;
+  }
+
+  function get_height(): Int {
+    return image.height;
+  }
+
   public function render(g: Graphics) {
-    if (image != null) {
-      g.drawImage(image, x, y);
-    }
+    g.drawImage(image, x, y);
   }
 
   public function update(controls: Controls, deltaTime: Float) {

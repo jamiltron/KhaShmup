@@ -3,15 +3,12 @@ package;
 import kha.Key;
 
 class Controls {
-
   public var left: Bool;
   public var right: Bool;
   public var up: Bool;
   public var down: Bool;
 
-  public function new() {
-
-  }
+  public function new() {}
 
   public function keyDown(key: Key) { 
     switch (key) {
