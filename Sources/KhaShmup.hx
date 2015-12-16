@@ -15,6 +15,7 @@ class KhaShmup {
 
   public static inline var screenWidth = 800;
   public static inline var screenHeight = 600;
+  public static inline var gunSpeed = 0.25;
 
   private var backbuffer: Image;
   private var controls: Controls;
@@ -64,10 +65,10 @@ class KhaShmup {
   }
 
   private function setupShip() {
-    ship = new Ship(Std.int(screenWidth / 2) - Std.int(Ship.width / 2), 
-      Std.int(screenHeight / 2) - Std.int(Ship.height / 2), 
+    ship = new Ship(Std.int(screenWidth / 2) - Std.int(ship.width / 2), 
+      Std.int(screenHeight / 2) - Std.int(ship.height / 2), 
       Assets.images.playerShip);
-    ship.attachGun(new Gun(0.25, Assets.images.bullet, Assets.sounds.bulletShoot));
+    ship.attachGun(new Gun(gunSpeed, Assets.images.bullet, Assets.sounds.bulletShoot));
   }
 
   private function update() {

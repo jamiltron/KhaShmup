@@ -6,7 +6,6 @@ import kha.graphics2.Graphics;
 class Ship {
   private var image: Image;
   private var gun: Gun;
-  private var halfWidth: Int;
   private var gunOffsetY = 10;
 
   public var x: Int;
@@ -19,7 +18,6 @@ class Ship {
     this.x = x;
     this.y = y;
     this.image = image;
-    halfWidth = Std.int(image.width / 2);
   }
 
   public function attachGun(gun: Gun) {
@@ -56,7 +54,7 @@ class Ship {
 
     if (gun != null) {
       if (controls.shoot) {
-        gun.shoot(x + halfWidth, y - gunOffsetY);
+        gun.shoot(x + Std.int(image.width / 2), y - gunOffsetY);
       }
       gun.update(deltaTime);
     }
