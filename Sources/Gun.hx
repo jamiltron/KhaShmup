@@ -11,7 +11,6 @@ class Gun {
   private var shotInterval: Float;
   private var cooldownLeft: Float;
   private var bullets: Array<Bullet>;
-  private var halfBulletWidth: Int;
 
   public function new(shotInterval: Float, bulletImage: Image, bulletSound: Sound) {
     this.shotInterval = shotInterval;
@@ -19,14 +18,13 @@ class Gun {
     this.bulletSound = bulletSound;
     cooldownLeft = 0;
     bullets = new Array<Bullet>();
-    halfBulletWidth = Std.int(bulletImage.width / 2);
   }
 
   public function shoot(x: Int, y: Int): Void {
     if (cooldownLeft <= 0) {
       Audio.play(bulletSound, true);
       cooldownLeft = shotInterval;
-      var adjX: Int = x - halfBulletWidth;
+      var adjX: Int = x - Std.int(bulletImage.width / 2);
 
       for (i in 0...bullets.length) {
         if (!bullets[i].isActive) {
