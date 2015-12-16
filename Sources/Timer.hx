@@ -3,7 +3,6 @@ package;
 import kha.Scheduler;
 
 class Timer {
-
   public var deltaTime(default, null): Float;
   public var lastTime(default, null): Float;
 
@@ -21,5 +20,4 @@ class Timer {
     lastTime = Scheduler.time();
     deltaTime = 0;
   }
-
 }

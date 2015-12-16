@@ -4,9 +4,6 @@ import kha.Image;
 import kha.graphics2.Graphics;
 
 class Ship {
-  public static inline var width = 99;
-  public static inline var height = 75;
-
   private var image: Image;
   private var gun: Gun;
   private var halfWidth: Int;
@@ -14,7 +11,9 @@ class Ship {
 
   public var x: Int;
   public var y: Int;
-  public var speed: Float = 300.0;
+  public var width(get, null): Int;
+  public var height(get, null): Int;
+  public var speed = 300.0;
 
   public function new(x: Int, y: Int, image: Image) {
     this.x = x;
@@ -25,6 +24,14 @@ class Ship {
 
   public function attachGun(gun: Gun) {
     this.gun = gun;
+  }
+
+  function get_width(): Int {
+    return image.width;
+  }
+
+  function get_height(): Int {
+    return image.height;
   }
 
   public function render(g: Graphics) {

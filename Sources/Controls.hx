@@ -3,15 +3,13 @@ package;
 import kha.Key;
 
 class Controls {
-
   public var left: Bool;
   public var right: Bool;
   public var up: Bool;
   public var down: Bool;
   public var shoot: Bool;
 
-  public function new() {
-  }
+  public function new() {}
 
   public function keyDown(key: Key, value: String) { 
     switch (key) {
@@ -24,7 +22,7 @@ class Controls {
     case DOWN:
       down = true;
     case CHAR:
-      if (value.toLowerCase() == "z") {
+      if (value == "z") {
         shoot = true;
       }
     default:
@@ -43,7 +41,7 @@ class Controls {
     case DOWN:
       down = false;
     case CHAR:
-      if (value.toLowerCase() == "z") {
+      if (value == "z") {
         shoot = false;
       }
     default:
