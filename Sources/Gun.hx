@@ -6,7 +6,6 @@ import kha.audio1.Audio;
 import kha.graphics2.Graphics;
 
 class Gun {
-
   private var bulletImage: Image;
   private var bulletSound: Sound;
   private var shotInterval: Float;
