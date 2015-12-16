@@ -18,11 +18,11 @@ class Ship {
     this.image = image;
   }
 
-  function get_width(): Int {
+  private function get_width(): Int {
     return image.width;
   }
 
-  function get_height(): Int {
+  private function get_height(): Int {
     return image.height;
   }
 
