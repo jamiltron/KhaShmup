@@ -58,5 +58,4 @@ class Gun {
       bullets[i].render(g);
     }
   }
-
 }

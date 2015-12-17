@@ -48,5 +48,4 @@ class Controls {
       //no-op
     }
   }
-
 }
