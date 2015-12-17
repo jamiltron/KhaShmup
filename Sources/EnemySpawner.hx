@@ -32,7 +32,7 @@ class EnemySpawner {
   }
 
   private function generateRandomX(minSpawnX, maxSpawnX): Int {
-    return Std.random(maxSpawnX - enemyImage.width) + minSpawnX;
+    return Std.random(maxSpawnX - minSpawnX) + minSpawnX;
   }
 
   private function spawn(x: Int, y: Int): Void {
@@ -42,7 +42,7 @@ class EnemySpawner {
           return;
         }
       }
-
+      
     enemies.push(new Enemy(x, y, enemyImage));
   }
 
@@ -52,7 +52,7 @@ class EnemySpawner {
     if (currentTime >= spawnNextTime) {
       currentTime = 0;
       spawnNextTime = generateRandomSpawnTime(spawnMinTime, spawnMaxTime);
-      spawn(generateRandomX(minSpawnX, maxSpawnX), -enemyImage.height);
+      spawn(generateRandomX(minSpawnX, maxSpawnX - enemyImage.width), -enemyImage.height);
     }
 
     for (i in 0...enemies.length) {
