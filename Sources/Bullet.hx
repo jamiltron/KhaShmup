@@ -4,7 +4,6 @@ import kha.Image;
 import kha.graphics2.Graphics;
 
 class Bullet {
-
   private var image: Image;
 
   public var x: Int;
@@ -13,9 +12,8 @@ class Bullet {
   public var isActive: Bool = true;
 
   public function new(x: Int, y: Int, image: Image) {
-    this.x = x;
-    this.y = y;
     this.image = image;
+    activate(x, y);
   }
 
   public function activate(x: Int, y: Int) {
@@ -38,7 +36,5 @@ class Bullet {
     }
 
     y -= Math.round(speed * deltaTime);
-
   }
-
 }

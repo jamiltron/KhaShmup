@@ -13,8 +13,9 @@ class KhaShmup {
 
   private static var bgColor = Color.fromValue(0x26004d);
 
-  public static inline var width = 800;
-  public static inline var height = 600;
+  public static inline var screenWidth = 800;
+  public static inline var screenHeight = 600;
+  public static inline var gunSpeed = 0.25;
 
   private var backbuffer: Image;
   private var controls: Controls;
@@ -30,7 +31,13 @@ class KhaShmup {
     initialized = true;
 
     // create a buffer to draw to
-    backbuffer = Image.createRenderTarget(width, height);
+    backbuffer = Image.createRenderTarget(screenWidth, screenHeight);
+
+    // create our player
+    var shipImg = Assets.images.playerShip;
+    ship = new Ship(Std.int(screenWidth / 2) - Std.int(shipImg.width / 2), 
+      Std.int(screenHeight / 2) - Std.int(shipImg.height / 2), 
+      shipImg);
     controls = new Controls();
     timer = new Timer();
     Keyboard.get().notify(keyDown, keyUp);
@@ -58,10 +65,10 @@ class KhaShmup {
   }
 
   private function setupShip() {
-    ship = new Ship(Std.int(width / 2) - Std.int(Ship.width / 2), 
-      Std.int(height / 2) - Std.int(Ship.height / 2), 
+    ship = new Ship(Std.int(screenWidth / 2) - Std.int(ship.width / 2), 
+      Std.int(screenHeight / 2) - Std.int(ship.height / 2), 
       Assets.images.playerShip);
-    ship.attachGun(new Gun(0.25, Assets.images.bullet, Assets.sounds.bulletShoot));
+    ship.attachGun(new Gun(gunSpeed, Assets.images.bullet, Assets.sounds.bulletShoot));
   }
 
   private function update() {
@@ -75,18 +82,16 @@ class KhaShmup {
     // limit the ship to the width of the screen
     if (ship.x < 0) {
       ship.x = 0;
-    } else if (ship.x + Ship.width > width) {
-      ship.x = width - Ship.width;
+    } else if (ship.x + ship.width > screenWidth) {
+      ship.x = screenWidth - ship.width;
     }
 
     // limit the ship to the height of the screen
     if (ship.y < 0) {
       ship.y = 0;
-    } else if (ship.y + Ship.height > height) {
-      ship.y = height - Ship.height;
+    } else if (ship.y + ship.height > screenHeight) {
+      ship.y = screenHeight - ship.height;
     }
-
-
   }
 
   private function keyDown(key: Key, value: String): Void {
