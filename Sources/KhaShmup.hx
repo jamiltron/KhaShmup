@@ -64,7 +64,6 @@ class KhaShmup {
     Scaler.scale(backbuffer, framebuffer, System.screenRotation);
     framebuffer.g2.end();
 
-    update();
   }
 
   private function setupShip() {
@@ -74,7 +73,11 @@ class KhaShmup {
     ship.attachGun(new Gun(gunSpeed, Assets.images.bullet, Assets.sounds.bulletShoot));
   }
 
-  private function update() {
+  public function update() {
+    if (!initialized) {
+      return;
+    }
+
     timer.update();
     enemySpawner.update(timer.deltaTime);
     updateShip();
