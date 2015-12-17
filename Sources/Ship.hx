@@ -4,27 +4,32 @@ import kha.Image;
 import kha.graphics2.Graphics;
 
 class Ship {
-  public static inline var width = 99;
-  public static inline var height = 75;
-
   private var image: Image;
   private var gun: Gun;
-  private var halfWidth: Int;
   private var gunOffsetY = 10;
 
   public var x: Int;
   public var y: Int;
-  public var speed = 300;
+  public var width(get, null): Int;
+  public var height(get, null): Int;
+  public var speed = 300.0;
 
   public function new(x: Int, y: Int, image: Image) {
     this.x = x;
     this.y = y;
     this.image = image;
-    halfWidth = Std.int(image.width / 2);
   }
 
   public function attachGun(gun: Gun) {
     this.gun = gun;
+  }
+
+  private function get_width(): Int {
+    return image.width;
+  }
+
+  private function get_height(): Int {
+    return image.height;
   }
 
   public function render(g: Graphics) {
@@ -49,7 +54,7 @@ class Ship {
 
     if (gun != null) {
       if (controls.shoot) {
-        gun.shoot(x + halfWidth, y - gunOffsetY);
+        gun.shoot(x + Std.int(image.width / 2), y - gunOffsetY);
       }
       gun.update(deltaTime);
     }
