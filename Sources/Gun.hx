@@ -20,6 +20,17 @@ class Gun {
     bullets = new Array<Bullet>();
   }
 
+  public function getActiveBullets(): Array<Bullet> {
+    var actives = new Array<Bullet>();
+
+    for (i in 0...bullets.length) {
+      if (bullets[i].isActive) {
+        actives.push(bullets[i]);
+      }
+    }
+    return actives;
+  }
+
   public function shoot(x: Int, y: Int): Void {
     if (cooldownLeft <= 0) {
       Audio.play(bulletSound, true);

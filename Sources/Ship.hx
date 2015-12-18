@@ -3,25 +3,25 @@ package;
 import kha.Image;
 import kha.graphics2.Graphics;
 
-class Ship {
+class Ship  {
+  private var hitbox: Rectangle;
   private var image: Image;
-  private var gun: Gun;
   private var gunOffsetY = 10;
 
+  public var gun: Gun;
   public var x: Int;
   public var y: Int;
   public var width(get, null): Int;
   public var height(get, null): Int;
   public var speed = 300.0;
 
+
   public function new(x: Int, y: Int, image: Image) {
     this.x = x;
     this.y = y;
     this.image = image;
-  }
 
-  public function attachGun(gun: Gun) {
-    this.gun = gun;
+    hitbox = new Rectangle(x, y, image.width, image.height);
   }
 
   private function get_width(): Int {
@@ -30,6 +30,17 @@ class Ship {
 
   private function get_height(): Int {
     return image.height;
+  }
+
+  public function getHitbox(): Rectangle {
+    hitbox.x = x;
+    hitbox.y = y;
+
+    return hitbox;
+  }
+
+  public function hit(): Void {
+    // todo: implement
   }
 
   public function render(g: Graphics) {

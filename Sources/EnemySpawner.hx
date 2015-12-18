@@ -46,6 +46,17 @@ class EnemySpawner {
     enemies.push(new Enemy(x, y, enemyImage));
   }
 
+  public function getActiveEnemies(): Array<Enemy> {
+    var actives = new Array<Enemy>();
+
+    for (i in 0...enemies.length) {
+      if (enemies[i].isActive) {
+        actives.push(enemies[i]);
+      }
+    }
+    return actives;
+  }
+
   public function update(deltaTime: Float) {
     currentTime += deltaTime;
 
