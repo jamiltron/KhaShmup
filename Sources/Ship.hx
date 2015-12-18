@@ -3,8 +3,7 @@ package;
 import kha.Image;
 import kha.graphics2.Graphics;
 
-class Ship  {
-  private var hitbox: Rectangle;
+class Ship {
   private var image: Image;
   private var gunOffsetY = 10;
 
@@ -20,8 +19,6 @@ class Ship  {
     this.x = x;
     this.y = y;
     this.image = image;
-
-    hitbox = new Rectangle(x, y, image.width, image.height);
   }
 
   private function get_width(): Int {
@@ -30,17 +27,6 @@ class Ship  {
 
   private function get_height(): Int {
     return image.height;
-  }
-
-  public function getHitbox(): Rectangle {
-    hitbox.x = x;
-    hitbox.y = y;
-
-    return hitbox;
-  }
-
-  public function hit(): Void {
-    // todo: implement
   }
 
   public function render(g: Graphics) {

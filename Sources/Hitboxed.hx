@@ -1,7 +1,6 @@
 package;
 
 interface Hitboxed {
-
-  public function getHitbox(): Rectangle;
+  public var hitbox: Hitbox;
   public function hit(): Void;
 }

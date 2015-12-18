@@ -14,9 +14,9 @@ class Rectangle {
   }
 
   public function overlaps(other: Rectangle): Bool {
-    return ((x < other.x + other.width) && 
-           (x + width > other.x) && 
-           (y < other.y + other.height) && 
-           (y + height > other.y));
+    return x <= other.x + other.width && 
+           x + width >= other.x && 
+           y <= other.y + other.height && 
+           y + height >= other.y;
   }
 }

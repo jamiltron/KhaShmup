@@ -19,7 +19,6 @@ class CollisionHandler {
   }
 
   public static function testCollision(h1: Hitboxed, h2: Hitboxed): Bool {
-    return h1.getHitbox().overlaps(h2.getHitbox());
+    return h1.hitbox.overlaps(h2.hitbox);
   }
-
 }

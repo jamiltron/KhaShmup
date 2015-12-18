@@ -5,8 +5,8 @@ import kha.graphics2.Graphics;
 
 class Bullet implements Hitboxed {
   private var image: Image;
-  private var hitbox: Rectangle;
 
+  public var hitbox: Hitbox;
   public var x: Int;
   public var y: Int;
   public var speed = 600;
@@ -14,21 +14,15 @@ class Bullet implements Hitboxed {
 
   public function new(x: Int, y: Int, image: Image) {
     this.image = image;
+    hitbox = new Hitbox(x, y, 0, 0, image.width, image.height);
     activate(x, y);
-    hitbox = new Rectangle(x, y, image.width, image.height);
   }
 
   public function activate(x: Int, y: Int) {
     this.x = x;
     this.y = y;
+    hitbox.updatePosition(x, y);
     isActive = true;
-  }
-
-  public function getHitbox(): Rectangle {
-    hitbox.x = x;
-    hitbox.y = y;
-
-    return hitbox;
   }
 
   public function hit(): Void {
@@ -47,5 +41,6 @@ class Bullet implements Hitboxed {
     }
 
     y -= Math.round(speed * deltaTime);
+    hitbox.updatePosition(x, y);
   }
 }

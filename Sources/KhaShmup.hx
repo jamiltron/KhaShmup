@@ -29,7 +29,6 @@ class KhaShmup {
   }
 
   private function loadingFinished(): Void {
-    trace("loading finished!");
     initialized = true;
 
     // create a buffer to draw to
