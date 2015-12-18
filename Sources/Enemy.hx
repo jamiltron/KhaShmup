@@ -1,6 +1,8 @@
 package;
 
+import kha.Assets;
 import kha.Image;
+import kha.audio1.Audio;
 import kha.graphics2.Graphics;
 
 class Enemy implements Hitboxed {
@@ -36,6 +38,7 @@ class Enemy implements Hitboxed {
   }
 
   public function hit(): Void {
+    Audio.play(Assets.sounds.enemyExplosion, true);
     isActive = false;
   }
 
