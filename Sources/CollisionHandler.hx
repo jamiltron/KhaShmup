@@ -10,6 +10,7 @@ class CollisionHandler {
     }
   }
 
+  // compare every entity from leftGroup with every entity in rightGroup
   public static function handleGroupCollisions(leftGroup: Array<Hitboxed>, rightGroup: Array<Hitboxed>): Void {
     for (left in leftGroup) {
       for (right in rightGroup) {

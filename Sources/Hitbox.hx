@@ -31,7 +31,6 @@ class Hitbox {
     rectangle.y = parentY + offsetY;
     rectangle.width = width;
     rectangle.height = height;
-
   }
 
 }
