@@ -37,7 +37,7 @@ class KhaShmup {
     // create our player
     setupShip();
     controls = new Controls();
-    enemySpawner = new EnemySpawner(Assets.images.enemyShip, 1.0, 3.0, 0, screenWidth, screenHeight);
+    enemySpawner = new EnemySpawner(1.0, 3.0, 0, screenWidth, screenHeight);
     timer = new Timer();
     Keyboard.get().notify(keyDown, keyUp);
   }

@@ -1,6 +1,7 @@
 package;
 
 class Hitbox {
+  public var enabled: Bool;
   public var rectangle(default, null): Rectangle;
   public var parentX: Int;
   public var parentY: Int;
@@ -16,11 +17,16 @@ class Hitbox {
     this.offsetY = offsetY;
     this.width = width;
     this.height = height;
+    enabled = true;
 
     rectangle = new Rectangle(parentX + offsetX, parentY + offsetY, width, height);
   }
 
   public function overlaps(other: Hitbox): Bool {
+    if (!enabled || !other.enabled) {
+      return false;
+    }
+
     return rectangle.overlaps(other.rectangle);
   }
 
