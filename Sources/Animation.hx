@@ -6,10 +6,10 @@ class Animation {
   private var currentTime: Float;
   private var index: Int;
 
-  public var playState: PlayState;
   public var frames: Array<Image>;
   public var frameDuration: Float;
   public var isDone(get, null): Bool;
+  public var playState: PlayState;
 
   private function get_isDone(): Bool {
     return (Type.enumEq(playState, PlayState.Once) &&
@@ -52,5 +52,4 @@ class Animation {
   public function getFrame(i: Int): Image {
     return frames[i];
   }
-
 }
