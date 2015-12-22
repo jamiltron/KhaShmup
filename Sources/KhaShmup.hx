@@ -23,7 +23,7 @@ class KhaShmup {
   private var initialized = false;
   private var ship: Ship;
   private var timer: Timer;
-  private var score: Int;
+  private var uiManager: UIManager;
 
   public function new() {
     Assets.loadEverything(loadingFinished);
@@ -31,7 +31,6 @@ class KhaShmup {
 
   private function loadingFinished(): Void {
     initialized = true;
-    score = 0;
 
     // create a buffer to draw to
     backbuffer = Image.createRenderTarget(screenWidth, screenHeight);
@@ -41,6 +40,7 @@ class KhaShmup {
     controls = new Controls();
     enemySpawner = new EnemySpawner(1.0, 3.0, 0, screenWidth, screenHeight);
     timer = new Timer();
+    uiManager = new UIManager(10, 10, Assets.fonts.kenpixel_mini_square, 20);
     Keyboard.get().notify(keyDown, keyUp);
   }
 
@@ -55,6 +55,7 @@ class KhaShmup {
     g.begin(bgColor);
     enemySpawner.render(g);
     ship.render(g);
+    uiManager.render(g);
     g.end();
 
     // draw our backbuffer onto the active framebuffer
@@ -69,12 +70,7 @@ class KhaShmup {
     var bullets: Array<Hitboxed> = cast ship.gun.getActiveBullets();
     var enemies: Array<Hitboxed> = cast enemySpawner.getActiveEnemies();
 
-    CollisionHandler.handleGroupCollisions(bullets, enemies, updateScore);
-  }
-
-  private function updateScore(): Void {
-    score += 1;
-    trace("score: " + score);
+    CollisionHandler.handleGroupCollisions(bullets, enemies, uiManager.scoreUp);
   }
 
   private function setupShip() {

@@ -2,7 +2,7 @@ package;
 
 class CollisionHandler {
 
-  // checks if 2 entities collide, and if so 'hits' them both
+  // checks if 2 entities collide, and if so 'hits' them both, and calls a callback is applicable
   public static function handleBiCollision(h1: Hitboxed, h2: Hitboxed, ?callback: Void->Void = null): Void {
     if (testCollision(h1, h2)) {
       h1.hit();
