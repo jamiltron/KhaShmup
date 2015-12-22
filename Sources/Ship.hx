@@ -5,23 +5,20 @@ import kha.graphics2.Graphics;
 
 class Ship {
   private var image: Image;
-  private var gun: Gun;
   private var gunOffsetY = 10;
 
+  public var gun: Gun;
   public var x: Int;
   public var y: Int;
   public var width(get, null): Int;
   public var height(get, null): Int;
   public var speed = 300.0;
 
+
   public function new(x: Int, y: Int, image: Image) {
     this.x = x;
     this.y = y;
     this.image = image;
-  }
-
-  public function attachGun(gun: Gun) {
-    this.gun = gun;
   }
 
   private function get_width(): Int {

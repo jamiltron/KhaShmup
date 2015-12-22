@@ -35,15 +35,11 @@ class KhaShmup {
     backbuffer = Image.createRenderTarget(screenWidth, screenHeight);
 
     // create our player
-    var shipImg = Assets.images.playerShip;
-    ship = new Ship(Std.int(screenWidth / 2) - Std.int(shipImg.width / 2), 
-      Std.int(screenHeight / 2) - Std.int(shipImg.height / 2), 
-      shipImg);
+    setupShip();
     controls = new Controls();
-    enemySpawner = new EnemySpawner(Assets.images.enemyShip, 1.0, 3.0, 0, screenWidth, screenHeight);
+    enemySpawner = new EnemySpawner(1.0, 3.0, 0, screenWidth, screenHeight);
     timer = new Timer();
     Keyboard.get().notify(keyDown, keyUp);
-    setupShip();
   }
 
   public function render(framebuffer: Framebuffer): Void {
@@ -66,11 +62,19 @@ class KhaShmup {
 
   }
 
+  private function handleCollisions() {
+    var bullets: Array<Hitboxed> = cast ship.gun.getActiveBullets();
+    var enemies: Array<Hitboxed> = cast enemySpawner.getActiveEnemies();
+
+    CollisionHandler.handleGroupCollisions(bullets, enemies);
+  }
+
   private function setupShip() {
-    ship = new Ship(Std.int(screenWidth / 2) - Std.int(ship.width / 2), 
-      Std.int(screenHeight / 2) - Std.int(ship.height / 2), 
-      Assets.images.playerShip);
-    ship.attachGun(new Gun(gunSpeed, Assets.images.bullet, Assets.sounds.bulletShoot));
+    var shipImg = Assets.images.playerShip;
+    ship = new Ship(Std.int(screenWidth / 2) - Std.int(shipImg.width / 2), 
+      Std.int(screenHeight / 2) - Std.int(shipImg.height / 2), 
+      shipImg);
+    ship.gun = new Gun(gunSpeed, Assets.images.bullet, Assets.sounds.bulletShoot);
   }
 
   public function update() {
@@ -81,6 +85,7 @@ class KhaShmup {
     timer.update();
     enemySpawner.update(timer.deltaTime);
     updateShip();
+    handleCollisions();
   }
 
   private function updateShip() {
