@@ -1,9 +1,8 @@
 KhaShmup
 ========
 
-This is a basic game written in Kha, hopefully branched out to provide a
-basic explanation as to how one may write a very small game using Kha.
-
+This is a basic game written in Kha to provide as a tutorial,
+follow along at [jamiltron.com](http://jamiltron.com)
 
 Assets
 ------
