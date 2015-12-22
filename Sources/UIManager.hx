@@ -28,6 +28,4 @@ class UIManager {
     g.fontSize = fontSize;
     g.drawString("score: " + score, x, y);
   }
-
-
 }
