@@ -23,6 +23,7 @@ class KhaShmup {
   private var initialized = false;
   private var ship: Ship;
   private var timer: Timer;
+  private var score: Int;
 
   public function new() {
     Assets.loadEverything(loadingFinished);
@@ -30,6 +31,7 @@ class KhaShmup {
 
   private function loadingFinished(): Void {
     initialized = true;
+    score = 0;
 
     // create a buffer to draw to
     backbuffer = Image.createRenderTarget(screenWidth, screenHeight);
@@ -67,7 +69,12 @@ class KhaShmup {
     var bullets: Array<Hitboxed> = cast ship.gun.getActiveBullets();
     var enemies: Array<Hitboxed> = cast enemySpawner.getActiveEnemies();
 
-    CollisionHandler.handleGroupCollisions(bullets, enemies);
+    CollisionHandler.handleGroupCollisions(bullets, enemies, updateScore);
+  }
+
+  private function updateScore(): Void {
+    score += 1;
+    trace("score: " + score);
   }
 
   private function setupShip() {
