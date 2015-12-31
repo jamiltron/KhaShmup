@@ -7,7 +7,15 @@ import kha.Image;
 import kha.Key;
 import kha.Scaler;
 import kha.System;
+import kha.graphics2.Graphics;
 import kha.input.Keyboard;
+
+enum GameState {
+  Initializing;
+  MainMenu;
+  Playing;
+  Over;
+}
 
 class KhaShmup {
 
@@ -20,17 +28,18 @@ class KhaShmup {
   private var backbuffer: Image;
   private var controls: Controls;
   private var enemySpawner: EnemySpawner;
-  private var initialized = false;
+  private var gameState: GameState;
   private var ship: Ship;
   private var timer: Timer;
   private var uiManager: UIManager;
 
   public function new() {
+    gameState = GameState.Initializing;
     Assets.loadEverything(loadingFinished);
   }
 
   private function loadingFinished(): Void {
-    initialized = true;
+    gameState = GameState.MainMenu;
 
     // create a buffer to draw to
     backbuffer = Image.createRenderTarget(screenWidth, screenHeight);
@@ -40,12 +49,33 @@ class KhaShmup {
     controls = new Controls();
     enemySpawner = new EnemySpawner(1.0, 3.0, 0, screenWidth, screenHeight);
     timer = new Timer();
-    uiManager = new UIManager(10, 10, Assets.fonts.kenpixel_mini_square, 20);
+    uiManager = new UIManager(Assets.fonts.kenpixel_mini_square, 20, 80, 30, new Rectangle(0, 0, screenWidth, screenHeight));
     Keyboard.get().notify(keyDown, keyUp);
   }
 
+  private function reset() {
+    controls.reset();
+    ship.reset(Std.int(screenWidth / 2) - Std.int(ship.width / 2), 
+      Std.int(screenHeight / 2) - Std.int(ship.height / 2));
+    enemySpawner.reset();
+  }  
+
+  private function renderMainMenu(g: Graphics): Void {
+    uiManager.renderMainMenu(g);
+  }
+
+  private function renderPlaying(g: Graphics): Void {
+    enemySpawner.render(g);
+    ship.render(g);
+    uiManager.renderScore(g);
+  }
+
+  private function renderOver(g: Graphics): Void {
+
+  }
+
   public function render(framebuffer: Framebuffer): Void {
-    if (!initialized) {
+    if (Type.enumEq(gameState, GameState.Initializing)) {
       return;
     }
 
@@ -53,9 +83,16 @@ class KhaShmup {
 
     // clear and draw to our backbuffer
     g.begin(bgColor);
-    enemySpawner.render(g);
-    ship.render(g);
-    uiManager.render(g);
+    switch(gameState) {
+    case GameState.MainMenu:
+      renderMainMenu(g);
+      updateMainMenu();
+    case GameState.Playing:
+      renderPlaying(g);
+      updatePlaying();
+    default:
+      // no-op
+    }
     g.end();
 
     // draw our backbuffer onto the active framebuffer
@@ -63,7 +100,6 @@ class KhaShmup {
     Scaler.scale(backbuffer, framebuffer, System.screenRotation);
     framebuffer.g2.end();
 
-    update();
   }
 
   private function handleCollisions() {
@@ -81,7 +117,14 @@ class KhaShmup {
     ship.gun = new Gun(gunSpeed, Assets.images.bullet, Assets.sounds.bulletShoot);
   }
 
-  private function update() {
+  private function updateMainMenu() {
+    if (controls.shoot) {
+      reset();
+      gameState = GameState.Playing;
+    }
+  }
+
+  private function updatePlaying() {
     timer.update();
     enemySpawner.update(timer.deltaTime);
     updateShip();

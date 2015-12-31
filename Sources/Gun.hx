@@ -31,6 +31,13 @@ class Gun {
     return actives;
   }
 
+  public function reset() {
+    cooldownLeft = 0;
+    for (bullet in bullets) {
+      bullet.isActive = false;
+    }
+  }
+
   public function shoot(x: Int, y: Int): Void {
     if (cooldownLeft <= 0) {
       Audio.play(bulletSound, true);

@@ -48,4 +48,12 @@ class Controls {
       //no-op
     }
   }
+
+  public function reset() {
+    left = false;
+    right = false;
+    up = false;
+    down = false;
+    shoot = false;
+  }
 }
