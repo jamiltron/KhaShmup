@@ -21,6 +21,7 @@ class UIManager {
 
   private var score: Int;
 
+
   public function new(font: Font, scoreSize: Int, titleSize: Int, 
                       instructionSize: Int, viewport: Rectangle) {
     this.font = font;
@@ -32,6 +33,10 @@ class UIManager {
 
   public function scoreUp(): Void {
     score += 1;
+  }
+
+  public function reset(): Void {
+    score = 0;
   }
 
   public function renderScore(g: Graphics): Void {

@@ -58,6 +58,8 @@ class KhaShmup {
     ship.reset(Std.int(screenWidth / 2) - Std.int(ship.width / 2), 
       Std.int(screenHeight / 2) - Std.int(ship.height / 2));
     enemySpawner.reset();
+    uiManager.reset();
+    timer.reset();
   }  
 
   private function renderMainMenu(g: Graphics): Void {
@@ -99,7 +101,6 @@ class KhaShmup {
     framebuffer.g2.begin();
     Scaler.scale(backbuffer, framebuffer, System.screenRotation);
     framebuffer.g2.end();
-
   }
 
   private function handleCollisions() {
