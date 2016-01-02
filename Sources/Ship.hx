@@ -36,6 +36,15 @@ class Ship {
     g.drawImage(image, x, y);
   }
 
+  public function reset(x: Int, y: Int) {
+    this.x = x;
+    this.y = y;
+
+    if (gun != null) {
+      gun.reset();
+    }
+  }
+
   public function update(controls: Controls, deltaTime: Float) {
     if (controls.left && !controls.right) {
       x -= Math.round(speed * deltaTime);

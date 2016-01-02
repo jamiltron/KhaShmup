@@ -1,6 +1,5 @@
 package;
 
-import kha.Scheduler;
 import kha.System;
 
 class Main {
@@ -12,7 +11,6 @@ class Main {
   private static function init() {
     var game = new KhaShmup();
     System.notifyOnRender(game.render);
-    Scheduler.addFrameTask(game.update, 1);
   }
 
 }

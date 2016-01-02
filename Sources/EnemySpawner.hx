@@ -40,6 +40,14 @@ class EnemySpawner {
     return Std.random(maxSpawnX - minSpawnX) + minSpawnX;
   }
 
+  public function reset() {
+    currentTime = 0;
+    spawnNextTime = generateRandomSpawnTime(spawnMinTime, spawnMaxTime);
+    for (enemy in enemies) {
+      enemy.isActive = false;
+    }
+  }
+
   private function setAssets() {
     enemyImage = Assets.images.enemyShip;
     var explodeFrames = new Array<Image>();
