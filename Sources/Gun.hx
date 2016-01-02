@@ -40,7 +40,7 @@ class Gun {
 
   public function shoot(x: Int, y: Int): Void {
     if (cooldownLeft <= 0) {
-      Audio.play(bulletSound, true);
+      Audio.play(bulletSound, false, true);
       cooldownLeft = shotInterval;
       var adjX: Int = x - Std.int(bulletImage.width / 2);
 

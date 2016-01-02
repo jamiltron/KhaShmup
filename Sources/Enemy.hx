@@ -68,7 +68,7 @@ class Enemy implements Hitboxed {
   }
 
   public function hit(): Void {
-    Audio.play(explosionSound, true);
+    Audio.play(explosionSound, false, true);
     enemyState = EnemyState.Exploding;
     setAnimation(explodeAnimation);
     hitbox.enabled = false;
