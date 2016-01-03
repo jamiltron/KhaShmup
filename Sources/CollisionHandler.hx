@@ -23,6 +23,14 @@ class CollisionHandler {
     }
   }
 
+  // convenience method for comparing a single entity vs many for collisions
+  public static function handleSingleToGroupCollisions(single: Hitboxed, group: Array<Hitboxed>,
+                                                       ?callback: Void->Void = null): Void {
+    for (g in group) {
+      handleBiCollision(single, g, callback);
+    }
+  }
+
   public static function testCollision(h1: Hitboxed, h2: Hitboxed): Bool {
     return h1.hitbox.overlaps(h2.hitbox);
   }

@@ -108,6 +108,11 @@ class KhaShmup {
     var enemies: Array<Hitboxed> = cast enemySpawner.getActiveEnemies();
 
     CollisionHandler.handleGroupCollisions(bullets, enemies, uiManager.scoreUp);
+    CollisionHandler.handleSingleToGroupCollisions(ship, enemies, setGameOver);
+  }
+
+  private function setGameOver() {
+    trace("GAME OVER!");
   }
 
   private function setupShip() {

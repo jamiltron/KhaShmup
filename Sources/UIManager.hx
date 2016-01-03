@@ -12,6 +12,8 @@ class UIManager {
   private static inline var keysY = 130;
   private static inline var startStr = "Press Z to start.";
   private static inline var startY = 100;
+  private static inline var gameOverStr = "Game Over";
+  private static inline var restartStr = "Press Z to restart.";
 
   public var font: Font;
   public var scoreSize: Int;
@@ -39,6 +41,19 @@ class UIManager {
     score = 0;
   }
 
+  public function renderGameOver(g: Graphics): Void {
+    g.font = font;
+    g.fontSize = titleSize;
+    
+    var x = viewport.x + Math.round(viewport.width / 2);
+    var gameOverW = g.font.width(titleSize, gameOverStr);
+    g.drawString(gameOverStr, x - Math.round(gameOverW / 2), viewport.y + titleY);
+
+    g.fontSize = instructionSize;
+    var restartW = g.font.width(instructionSize, restartStr);
+    g.drawString(restartStr, x - Math.round(restartW / 2), viewport.height - startY);
+  }
+
   public function renderScore(g: Graphics): Void {
     g.font = font;
     g.fontSize = scoreSize;
@@ -59,6 +74,5 @@ class UIManager {
 
     var startW = g.font.width(instructionSize, startStr);
     g.drawString(startStr, x - Math.round(startW / 2), viewport.height - startY);
-
   }
 }
