@@ -1,12 +1,16 @@
 package;
 
 import kha.Image;
+import kha.Sound;
+import kha.audio1.Audio;
 import kha.graphics2.Graphics;
 
 class Ship implements Hitboxed {
   private var image: Image;
   private var gunOffsetY = 10;
+  private var isActive = true;
 
+  public var explosionSound: Sound;
   public var hitbox: Hitbox;
   public var gun: Gun;
   public var x(default, set): Int;
@@ -15,12 +19,12 @@ class Ship implements Hitboxed {
   public var height(get, null): Int;
   public var speed = 300.0;
 
-
-  public function new(x: Int, y: Int, image: Image) {
+  public function new(x: Int, y: Int, image: Image, explosionSound: Sound) {
     hitbox = new Hitbox(x, y, 0, 0, image.width, image.height);
     this.x = x;
     this.y = y;
     this.image = image;
+    this.explosionSound = explosionSound;
   }
 
   private function get_width(): Int {
@@ -42,10 +46,15 @@ class Ship implements Hitboxed {
   }
 
   public function hit(): Void {
-    trace("ship hit!");
+    isActive = false;
+    Audio.play(explosionSound, false, true);
   }
 
   public function render(g: Graphics): Void {
+    if (!isActive) {
+      return;
+    }
+
     if (gun != null) {
       gun.render(g);
     }
@@ -53,6 +62,7 @@ class Ship implements Hitboxed {
   }
 
   public function reset(x: Int, y: Int): Void {
+    isActive = true;
     this.x = x;
     this.y = y;
 
@@ -62,6 +72,10 @@ class Ship implements Hitboxed {
   }
 
   public function update(controls: Controls, deltaTime: Float) {
+    if (!isActive) {
+      return;
+    }
+
     if (controls.left && !controls.right) {
       x -= Math.round(speed * deltaTime);
     } else if (controls.right && !controls.left) {

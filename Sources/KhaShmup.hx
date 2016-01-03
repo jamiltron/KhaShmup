@@ -7,6 +7,7 @@ import kha.Image;
 import kha.Key;
 import kha.Scaler;
 import kha.System;
+import kha.audio1.Audio;
 import kha.graphics2.Graphics;
 import kha.input.Keyboard;
 
@@ -72,8 +73,8 @@ class KhaShmup {
     uiManager.renderScore(g);
   }
 
-  private function renderOver(g: Graphics): Void {
-
+  private function renderGameOver(g: Graphics): Void {
+    uiManager.renderGameOver(g);
   }
 
   public function render(framebuffer: Framebuffer): Void {
@@ -92,6 +93,10 @@ class KhaShmup {
     case GameState.Playing:
       renderPlaying(g);
       updatePlaying();
+    case GameState.Over:
+      renderPlaying(g);
+      renderGameOver(g);
+      updateGameOver();
     default:
       // no-op
     }
@@ -112,15 +117,26 @@ class KhaShmup {
   }
 
   private function setGameOver() {
-    trace("GAME OVER!");
+    gameState = GameState.Over;
+    controls.reset();
   }
 
   private function setupShip() {
     var shipImg = Assets.images.playerShip;
     ship = new Ship(Std.int(screenWidth / 2) - Std.int(shipImg.width / 2), 
       Std.int(screenHeight / 2) - Std.int(shipImg.height / 2), 
-      shipImg);
+      shipImg, Assets.sounds.playerExplosion);
     ship.gun = new Gun(gunSpeed, Assets.images.bullet, Assets.sounds.bulletShoot);
+  }
+
+  private function updateGameOver() {
+    timer.update();
+    enemySpawner.update(timer.deltaTime);
+
+    if (controls.shoot) {
+      reset();
+      gameState = GameState.Playing;
+    }
   }
 
   private function updateMainMenu() {
