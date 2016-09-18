@@ -47,7 +47,7 @@ class Ship implements Hitboxed {
 
   public function hit(): Void {
     isActive = false;
-    Audio.play(explosionSound, false, true);
+    Audio.play(explosionSound, false);
   }
 
   public function render(g: Graphics): Void {
