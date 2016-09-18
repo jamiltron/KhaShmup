@@ -48,12 +48,12 @@ class Enemy implements Hitboxed {
     return activeAnimation.getFrame(0).height;
   }
 
-  public function new(x: Int, y: Int, activeAnimation: Animation, 
+  public function new(x: Int, y: Int, activeAnimation: Animation,
                       explodeAnimation: Animation, explosionSound: Sound) {
     this.activeAnimation = activeAnimation;
     this.explodeAnimation = explodeAnimation;
     this.explosionSound = explosionSound;
-    hitbox = new Hitbox(x, y, 2, 0, activeAnimation.getFrame(0).width - 4, 
+    hitbox = new Hitbox(x, y, 2, 0, activeAnimation.getFrame(0).width - 4,
                         Std.int(activeAnimation.getFrame(0).height / 2));
     activate(x, y);
   }
@@ -68,7 +68,7 @@ class Enemy implements Hitboxed {
   }
 
   public function hit(): Void {
-    Audio.play(explosionSound, false, true);
+    Audio.play(explosionSound, false);
     enemyState = EnemyState.Exploding;
     setAnimation(explodeAnimation);
     hitbox.enabled = false;
