@@ -5,7 +5,7 @@ import kha.System;
 class Main {
 
   public static function main() {
-    System.init("KhaShmup", 800, 600, init);
+    System.init({ title: "KhaShmup", width: 800, height: 600 }, init);
   }
 
   private static function init() {

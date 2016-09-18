@@ -1,5 +1,5 @@
-var project = new Project('KhaShmup');
+let project = new Project('KhaSmup');
 
 project.addSources('Sources');
 
-return project;
+resolve(project);
