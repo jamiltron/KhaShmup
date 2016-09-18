@@ -38,7 +38,7 @@ class Enemy implements Hitboxed {
   }
 
   public function hit(): Void {
-    Audio.play(Assets.sounds.enemyExplosion, false, true);
+    Audio.play(Assets.sounds.enemyExplosion, false);
     isActive = false;
   }
 
