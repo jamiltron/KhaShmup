@@ -1,6 +1,6 @@
-var project = new Project('KhaShmup');
+let project = new Project('KhaSmup');
 
 project.addAssets('Assets/**');
 project.addSources('Sources');
 
-return project;
+resolve(project);
