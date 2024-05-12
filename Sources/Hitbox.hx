@@ -32,7 +32,7 @@ class Hitbox {
 
   public function updatePosition(parentX: Int, parentY: Int): Void {
     this.parentX = parentX;
-    this.parentY = parentX;
+    this.parentY = parentY;
     rectangle.x = parentX + offsetX;
     rectangle.y = parentY + offsetY;
     rectangle.width = width;
